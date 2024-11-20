@@ -26,7 +26,7 @@ export async function insertCabin(newCabin) {
     .select();
   if (error) {
     console.error(error);
-    throw new Error("Cabins could not be deleted");
+    throw new Error("Cabins could not be inserted");
   }
   return data;
 }
