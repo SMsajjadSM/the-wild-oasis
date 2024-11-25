@@ -1,4 +1,3 @@
-import { useForm } from "react-hook-form";
 
 import FormRow from "ui/FormRow";
 import Input from "ui/Input";
@@ -9,6 +8,7 @@ import { Textarea } from "ui/Textarea";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { insertCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 // Receives closeModal directly from Modal
 function CreateCabinForm() {
@@ -106,12 +106,8 @@ function onSubmit(data){
           accept="image/*"
           disabled={isWorking}
           {...register("image", {
-            // required: 'This field is required',
             required: isEditSession ? false : "This field is required",
 
-            // VIDEO this doesn't work, so never mind about this, it's too much
-            // validate: (value) =>
-            //   value[0]?.type.startsWith('image/') || 'Needs to be an image',
           })}
         />
       </FormRow>
