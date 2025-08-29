@@ -1,39 +1,29 @@
-# نام ورک‌فلو که در تب Actions نمایش داده می‌شود
 name: Daily Auto Commit
 
 on:
   schedule:
-    # هر روز ساعت 3:30 بامداد به وقت UTC اجرا می‌شود
-    # برای تغییر زمان، از سایت crontab.guru کمک بگیرید
-    - cron: '30 3 * * *'
-  # این خط به شما اجازه می‌دهد تا اکشن را به صورت دستی هم اجرا کنید
+    - cron: '30 17 * * *'
   workflow_dispatch:
 
 jobs:
   auto_commit_job:
-    # سیستم‌عاملی که اکشن روی آن اجرا می‌شود
     runs-on: ubuntu-latest
-    
-    # دسترسی لازم برای نوشتن (پوش کردن) در ریپازیتوری را به اکشن می‌دهد
     permissions:
       contents: write
       
     steps:
-      # مرحله ۱: کد پروژه شما را دانلود می‌کند
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # مرحله ۲: یک تغییر کوچک در یک فایل ایجاد می‌کند تا کامیت خالی نباشد
       - name: Modify a file
-        run: echo "Last update: $(date)" > last_update.md
+        run: |
+          echo "Last update: $(date)" > last_update.md
 
-      # مرحله ۳: تنظیمات گیت برای کامیت کردن
       - name: Configure Git
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'actions@github.com'
 
-      # مرحله ۴: تغییرات را stage کرده، کامیت و پوش می‌کند
       - name: Commit and push changes
         run: |
           git add .
